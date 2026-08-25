@@ -1,0 +1,20 @@
+ 1000 *--------------------------------
+ 1010 * MOONSWEEPER C-64 VERSION
+ 1020 * (C) 1984 IMAGIC
+ 1030 * BY DANIEL FILIBERTI
+ 1040 * A.C.T
+ 1050 *--------------------------------
+ 1060 *      .TI 55,MOONSWEEPER C-64
+ 1070	     .LIS OFF
+ 1080	     .IN MOON.MACROS,D1
+ 1090	     .IN MOON.EQUATES,D1
+ 1100	     .IN MOON.CODE.1,D1
+ 1110	     .IN MOON.CODE.2,D1
+ 1120	     .IN MOON.CODE.3,D1
+ 1130	     .IN MOON.CODE.4,D1
+ 1140	     .IN MOON.CODE.5,D1
+ 1150	     .IN MOON.IRQ,D1
+ 1160	     .IN MOON.SHAPES.1,D1
+ 1170	     .IN MOON.SHAPES.2,D1
+ 1180	     .EN
+

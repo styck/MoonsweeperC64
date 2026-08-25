@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build with 64tass",
+      "type": "shell",
+      "command": "C:/Users/styck/tools/64tass/64tass-1.60.3243/64tass.exe",
+      "args": [
+        "${workspaceFolder}/MOONSWPR.ASM",
+        "-o",
+        "${workspaceFolder}/MOONSWPR.prg",
+        "-L",
+        "${workspaceFolder}/listing.txt",
+        "--line-numbers",
+        "--verbose-list",
+        "--vice-labels",
+        "-l",
+        "${workspaceFolder}/labels.txt"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run in VICE",
+      "type": "shell",
+      "command": "C:/Users/styck/AppData/Local/Microsoft/WinGet/Packages/VICE-Team.VICE.GTK3_Microsoft.Winget.Source_8wekyb3d8bbwe/GTK3VICE-3.10-win64/bin/x64sc.exe",
+      "args": [
+        "-autostart",
+        "${workspaceFolder}/MOONSWPR.prg"
+      ],
+      "dependsOn": "Build with 64tass"
+    }
+  ]
+}

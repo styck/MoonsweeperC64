@@ -1,0 +1,660 @@
+ 1000 *--------------------------------
+ 1010 * FILE>MOON.CODE.2
+ 1020 *--------------------------------
+ 1030 INIT.HARDWARE	  LDA DDRA2
+ 1040			  ORA #$03		       SELECT VIDEO BANK
+ 1050			  STA DDRA2
+ 1060			  LDA PORTA2
+ 1070			  AND #$FC
+ 1080			  ORA #$02		       SELECT BANK 1
+ 1090			  STA PORTA2		       $4000-$8000
+ 1100			  LDA #$20		       SETUP POINTER TO CHARACTER SET
+ 1110			  STA VIC.MEMORY
+ 1120			  LDA #PURPLE
+ 1130			  STA MCOL1
+ 1140			  LDA #YELLOW
+ 1150			  STA MCOL2
+ 1160			  LDA #$00
+ 1170			  STA SPRITE.MULTI.COLOR
+ 1180			  LDA #$57
+ 1190			  STA RANDOM.NUMBER
+ 1200			  LDA #COLD.START
+ 1210			  STA $8000
+ 1220			  STA $8002
+ 1230			  LDA /COLD.START
+ 1240			  STA $8001
+ 1250			  STA $8003
+ 1260			  LDA #$C3
+ 1270			  STA $8004
+ 1280			  LDA #$C2
+ 1290			  STA $8005
+ 1300			  LDA #$CD
+ 1310			  STA $8006
+ 1320			  LDA #$38
+ 1330			  STA $8007
+ 1340			  LDA #$30
+ 1350			  STA $8008
+ 1360 *--------------------------------
+ 1370			  >BUILD GAMESET,TEMP1	       MOVE CSET TO RAM!
+ 1380			  >BUILD CHARACTER.MEMORY,TEMP3
+ 1390			  LDY #$00
+ 1400 .1		  LDA (TEMP1),Y
+ 1410			  STA (TEMP3),Y
+ 1420			  >INC TEMP1
+ 1430			  >INC TEMP3
+ 1440			  LDA TEMP1
+ 1450			  CMP #GAMEND
+ 1460			  BNE .1
+ 1470			  LDA TEMP2
+ 1480			  CMP /GAMEND
+ 1490			  BNE .1
+ 1500 *--------------------------------
+ 1510 CLEAR.SCREEN	  LDX #$00		       CLEAR SCREEN RAM
+ 1520			  TXA
+ 1530 .1		  STA SCREEN.MEMORY,X
+ 1540			  STA SCREEN.MEMORY+$100,X
+ 1550			  STA SCREEN.MEMORY+$200,X
+ 1560			  STA SCREEN.MEMORY+$300,X
+ 1570			  STA COLOR.MEMORY,X	       FOR HYPERSPACE
+ 1580			  STA COLOR.MEMORY+$100,X
+ 1590			  STA COLOR.MEMORY+$200,X
+ 1600			  STA COLOR.MEMORY+$300,X
+ 1610			  INX
+ 1620			  BNE .1
+ 1630 *--------------------------------
+ 1640			  LDA #$18
+ 1650			  STA VIC.CONTROL.1
+ 1660			  LDA #$08
+ 1670			  STA VIC.CONTROL.2
+ 1680 *--------------------------------
+ 1690 * INITIALIZE SOUND PROCESSOR
+ 1700 *--------------------------------
+ 1710			  LDA #$F5
+ 1720			  STA ENVELOPE.1
+ 1730			  STA ENVELOPE.2
+ 1740			  STA ENVELOPE.3
+ 1750			  LDA #$0F
+ 1760			  STA MASTER.VOLUME
+ 1770			  LDA #$08
+ 1780			  STA WAVE.1+1
+ 1790			  STA WAVE.2+1
+ 1800			  STA WAVE.3+1
+ 1810			  >BUILD STOP.SOUND,NOTE.POINTER
+ 1820 *--------------------------------
+ 1830			  LDA #$FF		       TURN ON ALL SPRITES!
+ 1840			  STA SPRITE.ENABLE
+ 1850 *--------------------------------
+ 1860			  LDA #IRQ1		       INITIALIZE IRQ LOCATION
+ 1870			  STA IRQLO		       TO POINT TO FIRST CHARACTER
+ 1880			  LDA /IRQ1
+ 1890			  STA IRQHI
+ 1900 *--------------------------------
+ 1910			  RTS
+ 1920 *--------------------------------
+ 1930 *  INIT I.O SYSTEM
+ 1940 *--------------------------------
+ 1950 INIT.IO		  LDA #$7F	   INITIALIZE CIA'S ETC.
+ 1960			  STA CIA.1.IRQ
+ 1970			  STA CIA.2.IRQ
+ 1980			  STA PORTA1
+ 1990			  LDA #$08
+ 2000			  STA CIA1.CTRL.A
+ 2010			  STA CIA2.CTRL.A
+ 2020			  STA CIA1.CTRL.B
+ 2030			  STA CIA2.CTRL.B
+ 2040			  LDX #$00
+ 2050			  STX DDRB1
+ 2060			  STX DDRB2
+ 2070			  STX $D418
+ 2080			  DEX
+ 2090			  STX DDRA1
+ 2100			  LDA #$07
+ 2110			  STA PORTA2
+ 2120			  LDA #$3F
+ 2130			  STA DDRA2
+ 2140			  LDA #$E7
+ 2150			  STA $01
+ 2160			  LDA #$2F
+ 2170			  STA $00
+ 2180			  RTS
+ 2190 *--------------------------------
+ 2200 * INITIALIZE.GAME
+ 2210 *--------------------------------
+ 2220 INIT.GAME 	  LDA #$05
+ 2230			  STA LIVES
+ 2240			  LDA #$00
+ 2250			  STA MOON.INDICATOR
+ 2260			  STA MEN.PICKED.UP
+ 2270			  STA SCORE
+ 2280			  JSR PANEL
+ 2290			  JSR DO.LIVES
+ 2300			  JSR DO.MOON.INDICATOR
+ 2310			  JSR DO.SCORE
+ 2320			  RTS
+ 2330 *--------------------------------
+ 2340 * DRAW CONTROL PANEL
+ 2350 *--------------------------------
+ 2360 PANEL		  LDX #$A0
+ 2370 .1		  LDA UNIV.SCR+$347,X
+ 2380			  STA SCREEN.MEMORY+$347,X
+ 2390			  LDA UNIV.ATR+$347,X
+ 2400			  STA COLOR.MEMORY+$347,X
+ 2410			  DEX
+ 2420			  BNE .1
+ 2430			  RTS
+ 2440 *--------------------------------
+ 2450 * UPDATES LIVES
+ 2460 *--------------------------------
+ 2470 DO.LIVES		  LDY #$06
+ 2480			  LDX LIVES
+ 2490			  BEQ .1
+ 2500			  LDA #$1C		       GET SHIP CHARACTER
+ 2510 .2		  STA SCREEN.MEMORY+$389,Y     PUT SHIP ON SCREEN
+ 2520			  DEY
+ 2530			  DEX
+ 2540			  BNE .2
+ 2550 .1		  LDA #$31		       GET FILLER CHARACTER
+ 2560 .3		  STA SCREEN.MEMORY+$389,Y     ERASE SHIP IF NEEDED
+ 2570			  DEY
+ 2580			  BNE .3
+ 2590			  RTS
+ 2600 *--------------------------------
+ 2610 * UPDATE MOON INDICATOR
+ 2620 *--------------------------------
+ 2630 DO.MOON.INDICATOR   LDA MOON.INDICATOR
+ 2640			  STA TEMP1
+ 2650			  LDA #$AC		       GET NUMBER FROM GAMESET
+ 2660			  CLC
+ 2670			  ADC TEMP1
+ 2680			  STA SCREEN.MEMORY+$37E       PUT NUMBER ON SCREEN
+ 2690			  RTS
+ 2700 *--------------------------------
+ 2710 * UPDATE MEN PICKED UP
+ 2720 *--------------------------------
+ 2730 DO.MEN.PICKED.UP	  INC MEN.PICKED.UP
+ 2740			  LDY MEN.PICKED.UP
+ 2750			  CPY #$06		       CAN'T BE MORE THAN 5!
+ 2760			  BCC .1
+ 2770			  RTS
+ 2780 .1		  CPY #$05
+ 2790			  BNE .2
+ 2800			  LDA #$01
+ 2810			  STA DO.RINGS.FLAG	       START DOING RINGS
+ 2820 .2		  LDA #$1D		       GET MAN CHARACTER
+ 2830 .3		  STA SCREEN.MEMORY+$3DA,Y     PUT IT ON SCREEN
+ 2840			  DEY
+ 2850			  BNE .3
+ 2860			  RTS
+ 2870 *--------------------------------
+ 2880 * MOVE SCREEN ROUTINE
+ 2890 *--------------------------------
+ 2900 MOVE.SCREEN	  LDA GAME.STATUS
+ 2910			  BEQ MOVE.U
+ 2920			  >BUILD ORBIT.SCR,TEMP1
+ 2930			  >BUILD SCREEN.MEMORY,TEMP3
+ 2940			  JSR MOV.ALL
+ 2950			  >BUILD ORBIT.ATR,TEMP1
+ 2960			  >BUILD COLOR.MEMORY,TEMP3
+ 2970			  JSR MOV.ALL
+ 2980			  RTS
+ 2990 *--------------------------------
+ 3000 MOVE.U		  >BUILD UNIV.SCR,TEMP1
+ 3010			  >BUILD SCREEN.MEMORY,TEMP3
+ 3020			  JSR MOV.ALL
+ 3030			  >BUILD UNIV.ATR,TEMP1
+ 3040			  >BUILD COLOR.MEMORY,TEMP3
+ 3050			  JSR MOV.ALL
+ 3060			  RTS
+ 3070 *--------------------------------
+ 3080 * MOVE TEMP1&2 TO TEMP3&4
+ 3090 * A LENGTH OF $347 BYTES
+ 3100 *--------------------------------
+ 3110 MOV.ALL		  >BUILD $347,TEMP5
+ 3120			  LDY #$00
+ 3130 .1		  LDA (TEMP1),Y
+ 3140			  STA (TEMP3),Y
+ 3150			  >INC TEMP1
+ 3160			  >INC TEMP3
+ 3170			  LDA TEMP5
+ 3180			  SEC
+ 3190			  SBC #$01
+ 3200			  STA TEMP5
+ 3210			  BCS .1
+ 3220			  DEC TEMP6
+ 3230			  BPL .1
+ 3240			  RTS
+ 3250 *--------------------------------
+ 3260 * ADDS TO SCORE
+ 3270 *--------------------------------
+ 3280 DO.SCORE.ADD	  SED
+ 3290			  LDA SCORE
+ 3300			  CLC
+ 3310			  ADC SCORE.TEMP
+ 3320			  STA SCORE
+ 3330			  LDA SCORE+1
+ 3340			  ADC SCORE.TEMP+1
+ 3350			  STA SCORE+1
+ 3360			  LDA SCORE+2
+ 3370			  ADC SCORE.TEMP+2
+ 3380			  STA SCORE+2
+ 3390			  CLD
+ 3400			  JSR DO.SCORE
+ 3410			  LDA SCORE+2
+ 3420			  AND #$0F
+ 3430			  CMP EXTRA.LIFE
+ 3440			  BEQ .1
+ 3450			  STA EXTRA.LIFE
+ 3460			  LDA LIVES
+ 3470			  CMP #$05
+ 3480			  BEQ .1
+ 3490			  INC LIVES
+ 3500			  JSR DO.LIVES
+ 3510 .1		  RTS
+ 3520 *--------------------------------
+ 3530 * SCORE ROUTINE
+ 3540 *--------------------------------
+ 3550 DO.SCORE		  LDX #$02		       THREE BCD DIGITS!
+ 3560			  LDY #$00
+ 3570			  LDA #$00
+ 3580			  STA TEMP1		       USED AS SUPRESSION FLAG
+ 3590 .1		  LDA SCORE,X
+ 3600			  LSR
+ 3610			  LSR
+ 3620			  LSR
+ 3630			  LSR
+ 3640			  JSR PRINT.SCORE
+ 3650			  LDA SCORE,X
+ 3660			  AND #$0F
+ 3670			  JSR PRINT.SCORE
+ 3680			  DEX
+ 3690			  BPL .1
+ 3700			  RTS
+ 3710 *--------------------------------
+ 3720 PRINT.SCORE	  STA TEMP2		       SAVE BCD DIGIT
+ 3730			  CPX #$00
+ 3740			  BEQ .2
+ 3750			  ORA TEMP1		       CHECK FLAG FOR BLANKS
+ 3760			  BEQ .3
+ 3770			  INC TEMP1		       FIRST NONZERO, FLAG=1
+ 3780 .2		  LDA TEMP2
+ 3790			  CLC
+ 3800			  ADC #$AC
+ 3810			  STA SCREEN.MEMORY+$3D2,Y
+ 3820 .3		  INY
+ 3830			  RTS
+ 3840 *--------------------------------
+ 3850 * SETUP HYPERSPACE SCREEN
+ 3860 *--------------------------------
+ 3870 HYPER.SPACE	  >BUILD SCREEN.MEMORY,TEMP1
+ 3880			  LDX #$F8
+ 3890 .3		  TXA
+ 3900			  LDY #$27
+ 3910 .1		  STA (TEMP1),Y
+ 3920			  DEY
+ 3930			  BPL .1
+ 3940			  LDA TEMP1
+ 3950			  CLC
+ 3960			  ADC #$28
+ 3970			  STA TEMP1
+ 3980			  BCC .2
+ 3990			  INC TEMP2
+ 4000 .2		  DEX
+ 4010			  CPX #$EF
+ 4020			  BNE .3
+ 4030			  LDX #$F1
+ 4040 .6		  TXA
+ 4050			  LDY #$27
+ 4060 .4		  STA (TEMP1),Y
+ 4070			  DEY
+ 4080			  BPL .4
+ 4090			  LDA TEMP1
+ 4100			  CLC
+ 4110			  ADC #$28
+ 4120			  STA TEMP1
+ 4130			  BCC .5
+ 4140			  INC TEMP2
+ 4150 .5		  INX
+ 4160			  CPX #$FD
+ 4170			  BNE .6
+ 4180			  LDA #$60
+ 4190			  STA GROUND.SPEED
+ 4200			  LDX #$00
+ 4210			  LDA #$01
+ 4220 .90		  STA COLOR.MEMORY,X
+ 4230			  STA COLOR.MEMORY+$100,X
+ 4240			  STA COLOR.MEMORY+$200,X
+ 4250			  STA COLOR.MEMORY+$258,X
+ 4260			  DEX
+ 4270			  BNE .90
+ 4280 *--------------------------------
+ 4290 * DO HYPER FOR THREE SECONDS
+ 4300 *--------------------------------
+ 4310 TIME.HYPER	  LDX #$70
+ 4320			  LDA #$81
+ 4330			  STA SCNTRL.1
+ 4340 .1		  STX FRQ.1+1
+ 4350			  TXA
+ 4360			  PHA
+ 4370			  JSR DO.STRIPES
+ 4380			  PLA
+ 4390			  TAX
+ 4400			  DEX
+ 4410			  BNE .1
+ 4420			  LDA #$00
+ 4430			  STA SCNTRL.1
+ 4440			  RTS
+ 4450 *--------------------------------
+ 4460 * DRAW STRIPES FOR SCROLL
+ 4470 *--------------------------------
+ 4480 DO.STRIPES	  LDA GROUND.SPEED
+ 4490			  ASL			       MULT BY 2
+ 4500			  CLC
+ 4510			  ADC ISSUE.STRIPE
+ 4520			  STA ISSUE.STRIPE
+ 4530			  BCC .1
+ 4540			  INC ISSUE.STRIPE+1
+ 4550 .1		  LDA ISSUE.STRIPE+1
+ 4560			  CMP #OFTEN		       TIME FOR A STRIPE?
+ 4570			  BMI NO.ISSUE		       IF NOT BRANCH
+ 4580 *--------------------------------
+ 4590			  SEC
+ 4600			  SBC #OFTEN
+ 4610			  STA ISSUE.STRIPE+1
+ 4620			  LDX #NUMBER.OF.STRIPES
+ 4630			  LDY #$00
+ 4640 *--------------------------------
+ 4650 FIND.STRIPE	  LDA STRIPE.TABLE,Y
+ 4660			  INY
+ 4670			  ORA STRIPE.TABLE,Y	       FIRST 2 BYTES 0?
+ 4680			  BEQ FOUND.STRIPE
+ 4690			  INY
+ 4700			  INY
+ 4710			  DEX			       DONE FOR ALL STRIPES?
+ 4720			  BNE FIND.STRIPE
+ 4730			  BEQ NO.ISSUE
+ 4740 *--------------------------------
+ 4750 FOUND.STRIPE	  LDA #$00
+ 4760			  STA STRIPE.TABLE,Y
+ 4770			  INY
+ 4780			  STA STRIPE.TABLE,Y
+ 4790			  DEY
+ 4800			  DEY
+ 4810			  LDA #$01
+ 4820			  STA STRIPE.TABLE,Y
+ 4830 *--------------------------------
+ 4840 NO.ISSUE		  LDX #NUMBER.OF.STRIPES
+ 4850			  LDY #$00
+ 4860 *--------------------------------
+ 4870 CALCS1		  LDA STRIPE.TABLE,Y
+ 4880			  STA TEMP3
+ 4890			  INY
+ 4900			  LDA STRIPE.TABLE,Y
+ 4910			  INY
+ 4920			  STA TEMP4
+ 4930			  ORA TEMP3		       IS TEMP 3,4 =0 (NULL STRIPE)
+ 4940			  BEQ NO.STRIPE.1
+ 4950			  JSR CALC.NEW.HEIGHT
+ 4960			  DEY
+ 4970			  DEY			       ADJUST POINTER TO BEGINNING
+ 4980			  LDA TEMP4
+ 4990			  CMP #STRIPE.HEIGHT*8
+ 5000			  BMI CALCS.OK		       CHECK FOR MAX HEIGHT
+ 5010			  LDA #$00
+ 5020			  STA TEMP3
+ 5030			  STA TEMP4
+ 5040 *--------------------------------
+ 5050 CALCS.OK		  LDA TEMP3
+ 5060			  STA STRIPE.TABLE,Y
+ 5070			  INY
+ 5080			  LDA TEMP4
+ 5090			  STA STRIPE.TABLE,Y	       REPLACE HEIGHT
+ 5100			  LSR
+ 5110			  CLC
+ 5120			  ADC STRIPE.TABLE,Y
+ 5130			  LSR
+ 5140			  LSR
+ 5150			  LSR
+ 5160			  CLC
+ 5170			  ADC #$01
+ 5180			  STA TEMP5
+ 5190			  LDA STRIPE.TABLE,Y
+ 5200			  CMP #45
+ 5210			  BMI NOT.THERE.YET
+ 5220			  SEC
+ 5230			  SBC #45
+ 5240			  LSR
+ 5250			  LSR
+ 5260			  LSR
+ 5270			  CLC
+ 5280			  ADC TEMP5
+ 5290			  STA TEMP5
+ 5300 *--------------------------------
+ 5310 NOT.THERE.YET	  SEC			       NEW WIDTH - CHECK FOR OVERFLOW
+ 5320			  SBC #96
+ 5330			  EOR #$FF
+ 5340			  CLC
+ 5350			  ADC #$01
+ 5360			  CMP TEMP5
+ 5370			  BMI WIDTH.OK
+ 5380			  LDA TEMP5
+ 5390 *--------------------------------
+ 5400 WIDTH.OK		  INY
+ 5410			  STA STRIPE.TABLE,Y	       PUT NEW WIDTH INTO TABLE
+ 5420 *--------------------------------
+ 5430 NO.STRIPE.1	  INY
+ 5440			  DEX
+ 5450			  BNE CALCS1		       DO FOR NUMBER OF STRIPES
+ 5460			  JSR LOAD.STRIPES
+ 5470			  RTS
+ 5480 *--------------------------------
+ 5490 * CALCULATE NEW HEIGHT FOR STRIPE
+ 5500 * TEMP 3,4 IS OLD HEIGHT FAC AND WHOLE
+ 5510 * TEMP 3,4 WILL CONTAIN NEW HEIGHT ON EXIT
+ 5520 *--------------------------------
+ 5530 CALC.NEW.HEIGHT
+ 5540			  TXA
+ 5550			  PHA
+ 5560			  TYA
+ 5570			  PHA
+ 5580			  LDY TEMP4
+ 5590			  LDA GROUND.SPEED	       MULT GROUND SPEED BY 1.5
+ 5600			  LSR
+ 5610			  CLC
+ 5620			  ADC GROUND.SPEED
+ 5630			  LSR
+ 5640			  LSR
+ 5650			  BEQ CALC.S12
+ 5660			  TAX
+ 5670 *--------------------------------
+ 5680 CALC.S11		  TYA
+ 5690			  CLC
+ 5700			  ADC TEMP3
+ 5710			  STA TEMP3
+ 5720			  BCC .1
+ 5730			  INC TEMP4
+ 5740 .1		  DEX
+ 5750			  BNE CALC.S11
+ 5760 *--------------------------------
+ 5770 CALC.S12		  LDA GROUND.SPEED
+ 5780			  CLC
+ 5790			  ADC TEMP3
+ 5800			  STA TEMP3
+ 5810			  BCC .1
+ 5820			  INC TEMP4
+ 5830 .1		  PLA
+ 5840			  TAY
+ 5850			  PLA
+ 5860			  TAX
+ 5870			  RTS
+ 5880 *--------------------------------
+ 5890 * BASED ON THE STRIPE TABLE RELOAD
+ 5900 * CHARACTER RAM WITH STRIPES
+ 5910 *--------------------------------
+ 5920 LOAD.STRIPES	  LDA $D011		       SYNC TO VERTICAL BLANK!
+ 5930			  BPL LOAD.STRIPES
+ 5940 *--------------------------------
+ 5950			  LDY #$7F
+ 5960			  LDA #$00
+ 5970 .1		  STA CHARACTER.MEMORY+$780,Y  CLEAR OLD STRIPE CHARACTERS
+ 5980			  DEY
+ 5990			  BPL .1
+ 6000			  LDX #NUMBER.OF.STRIPES       FILL IN EACH STRIPE!
+ 6010			  LDY #$00
+ 6020 *--------------------------------
+ 6030 LOAD.S1		  INY			       SKIP FRAC HEIGHT
+ 6040			  >BUILD CHARACTER.MEMORY+$780,TEMP1
+ 6050			  LDA STRIPE.TABLE,Y
+ 6060			  STA TEMP3
+ 6070			  INY
+ 6080			  LDA STRIPE.TABLE,Y
+ 6090			  INY
+ 6100			  CMP #$00
+ 6110			  BEQ NULL.WIDTH
+ 6120 *--------------------------------
+ 6130			  STA TEMP4
+ 6140			  LDA TEMP3
+ 6150			  CLC
+ 6160			  ADC TEMP1
+ 6170			  STA TEMP1
+ 6180			  BCC .1
+ 6190			  INC TEMP2
+ 6200 .1		  STY TEMP5		       SAVE Y
+ 6210			  LDY TEMP4
+ 6220			  JSR FILL.SRAM
+ 6230			  LDY TEMP5		       RESTORE Y
+ 6240 *--------------------------------
+ 6250 NULL.WIDTH	  DEX
+ 6260			  BNE LOAD.S1
+ 6270			  RTS
+ 6280 *--------------------------------
+ 6290 * FILL STRIPE.CHARACTERS
+ 6300 *--------------------------------
+ 6310 FILL.SRAM 	  LDA #$FF
+ 6320 .1		  STA (TEMP1),Y
+ 6330			  DEY
+ 6340			  BNE .1
+ 6350			  RTS
+ 6360 *--------------------------------
+ 6370 * PICK A GALAXY
+ 6380 *--------------------------------
+ 6390 PICK.GALAXY	  LDA #$52
+ 6400			  STA SPRITE.POINTER	       FIND CROSS (CARD 35)
+ 6410			  LDA #$6F
+ 6420			  STA SPRITE.YPOS	       CENTER Y POSITION
+ 6430			  LDA #$A4
+ 6440			  STA SPRITE.XPOS	       CENTER X POSITION
+ 6450 .11		  JSR GETPORT		       GET JOYSTICK MOVEMENT
+ 6460			  ROR			       CHECK FOR UP MOVEMENT
+ 6470			  BCS .1
+ 6480			  PHA			       SAVE DATA
+ 6490			  LDA SPRITE.YPOS
+ 6500			  CMP #$32		       OVER BOUNDARY?
+ 6510			  BNE .2
+ 6520			  LDA #$33
+ 6530 .2		  SEC
+ 6540			  SBC #$01		       MOVE IT UP ONE POSITION
+ 6550			  STA SPRITE.YPOS
+ 6560			  PLA			       GET BACK DATA FOR NEXT CHECK
+ 6570 .1		  ROR			       CHECK FOR DOWN MOVEMENT
+ 6580			  BCS .3
+ 6590			  PHA			       SAVE DATA
+ 6600			  LDA SPRITE.YPOS
+ 6610			  CMP #$C5		       OVER BOUNDARY?
+ 6620			  BNE .4
+ 6630			  LDA #$C4
+ 6640 .4		  CLC
+ 6650			  ADC #$01		       MOVE IT DOWN ONE POSITION
+ 6660			  STA SPRITE.YPOS
+ 6670			  PLA			       GET BACK DATA FOR NEXT CHECK
+ 6680 .3		  ROR			       CHECK FOR LEFT MOVEMENT
+ 6690			  BCS .5
+ 6700			  PHA			       SAVE DATA
+ 6710			  LDA SPRITE.XMSB
+ 6720			  AND #$01
+ 6730			  PHP			       SAVE PROCESSOR
+ 6740			  LDA SPRITE.XPOS
+ 6750			  PLP
+ 6760			  BNE .6
+ 6770			  CMP #$18		       OVER BOUNDARY?
+ 6780			  BEQ .7
+ 6790 .6		  SEC
+ 6800			  SBC #$01
+ 6810			  STA SPRITE.XPOS	       MOVE LEFT
+ 6820			  BCS .7
+ 6830			  LDA #$00
+ 6840			  STA SPRITE.XMSB
+ 6850 .7		  PLA			       GET BACK DATA
+ 6860 .5		  ROR			       CHECK FOR RIGHT MOVEMENT
+ 6870			  BCS .8
+ 6880			  LDA SPRITE.XMSB
+ 6890			  AND #$01
+ 6900			  PHP			       SAVE PROCESSOR
+ 6910			  LDA SPRITE.XPOS
+ 6920			  PLP
+ 6930			  BEQ .9
+ 6940			  CMP #$48		       OVER BOUNDARY?
+ 6950			  BEQ .8
+ 6960 .9		  CLC
+ 6970			  ADC #$01
+ 6980			  STA SPRITE.XPOS	       MOVE RIGHT
+ 6990			  BCC .8
+ 7000			  LDA #$01
+ 7010			  STA SPRITE.XMSB
+ 7020 *--------------------------------
+ 7030 .8		  INC SPRITE.COLOR	       MAKE CROSS DIFFERENT COLOR
+ 7040			  LDX #$03		       0-3 GALAXIES
+ 7050 .85		  LDA SPRITE.YPOS	       GET YPOS
+ 7060			  CMP Y1,X
+ 7070			  BCC .81		       IS YPOS > VALUE?
+ 7080			  CMP Y2,X
+ 7090			  BCS .81		       IS YPOS < VALUE?
+ 7100			  CPX #$01		       SPECIAL CASE BECAUSE OF MSB!
+ 7110			  BNE .82
+ 7120			  LDA SPRITE.XMSB	       GET MSB
+ 7130			  AND #$01		       SET?
+ 7140			  BNE .83
+ 7150			  LDA SPRITE.XPOS	       YES. SO GET XPOS
+ 7160			  CMP #$F0
+ 7170			  BCC .81		       IS XPOS > $F0
+ 7180			  BCS .84		       YES. GO TO ORBIT
+ 7190 .83		  LDA SPRITE.XPOS	       BIT NOT SET
+ 7200			  CMP #$0A
+ 7210			  BCS .81		       IS XPOS < $0A
+ 7220			  BCC .84		       YES. GO TO ORBIT
+ 7230 .82		  LDA SPRITE.XMSB
+ 7240			  AND #$01		       IF MSB IS SET ON GALAXIES
+ 7250			  BNE .81		       0,2, OR 3 THEN NO DETECTION.
+ 7260			  LDA SPRITE.XPOS	       GET XPOS
+ 7270			  CMP X1,X
+ 7280			  BCC .81		       IS XPOS > VALUE?
+ 7290			  CMP X2,X
+ 7300			  BCS .81		       IS XPOS < VALUE?
+ 7310 .84		  STX GALAXY		       SAVE GALAXY NUMBER
+ 7320			  LDA MOONTBL,X 	       SET UP NUMBER OF MOONS NEEDED
+ 7330			  STA MOON.INDICATOR
+ 7340			  LDA #$01
+ 7350			  STA GAME.STATUS	       SET FOR ORBIT
+ 7360			  LDA #$00
+ 7370			  STA SPRITE.YPOS	       GET SPRITE OFF SCREEN
+ 7380			  RTS
+ 7390 .81		  DEX			       TIME DELAY
+ 7400			  BPL .85
+ 7410			  LDX #$00
+ 7420			  LDY #$05
+ 7430 .86		  DEX
+ 7440			  BNE .86
+ 7450			  DEY
+ 7460			  BNE .86
+ 7470			  JMP .11
+ 7480 *--------------------------------
+ 7490 * TABLES FOR GALAXY DETECTION
+ 7500 *--------------------------------
+ 7510 Y1		  .HS 5244AC96
+ 7520 Y2		  .HS 6455BAA0
+ 7530 X1		  .HS 480032C4
+ 7540 X2		  .HS 640058DC
+ 7550 *--------------------------------
+ 7560 * TABLE FOR NUMBER OF MOONS NEEDED
+ 7570 *--------------------------------
+ 7580 MOONTBL		  .HS 01030609
+

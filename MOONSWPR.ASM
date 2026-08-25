@@ -1,20 +1,28 @@
- 1000 *--------------------------------
- 1010 * MOONSWEEPER C-64 VERSION
- 1020 * (C) 1984 IMAGIC
- 1030 * BY DANIEL FILIBERTI
- 1040 * A.C.T
- 1050 *--------------------------------
- 1060 *      .TI 55,MOONSWEEPER C-64
- 1070	     .LIS OFF
- 1080	     .IN MOON.MACROS,D1
- 1090	     .IN MOON.EQUATES,D1
- 1100	     .IN MOON.CODE.1,D1
- 1110	     .IN MOON.CODE.2,D1
- 1120	     .IN MOON.CODE.3,D1
- 1130	     .IN MOON.CODE.4,D1
- 1140	     .IN MOON.CODE.5,D1
- 1150	     .IN MOON.IRQ,D1
- 1160	     .IN MOON.SHAPES.1,D1
- 1170	     .IN MOON.SHAPES.2,D1
- 1180	     .EN
-
+;--------------------------------
+; MOONSWEEPER C-64 VERSION
+; (C) 1984 IMAGIC
+; BY DANIEL FILIBERTI
+; A.C.T
+;--------------------------------
+;      .TI 55,MOONSWEEPER C-64
+;      .LIS OFF
+;
+; Auto-run BASIC stub: 10 SYS <COLD_START> - the SYS address is
+; computed automatically by 64tass so it never needs updating.
+; The game code itself starts at $0860 (set in MOONEQU.ASM).
+
+* = $0801
+    .word (+), 10
+    .null $9e, format("%4d", COLD_START)
++   .word 0
+
+    .include "MOONMACR.ASM"
+    .include "MOONEQU.ASM"
+    .include "MOONCOD1.ASM"
+    .include "MOONCOD2.ASM"
+    .include "MOONCOD3.ASM"
+    .include "MOONCOD4.ASM"
+    .include "MOONCOD5.ASM"
+    .include "MOONIRQ.ASM"
+    .include "MOON.SHAPES.1"
+    .include "MOON.SHAPES.2"

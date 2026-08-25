@@ -367,3 +367,90 @@ Verification workflow used during the port:
 
 Because the original listing already prints the emitted bytes per line, it
 is the authoritative reference for confirming a byte-exact conversion.
+
+---
+
+## Moonsweeper port notes (2026)
+
+These gotchas were confirmed while porting *Moonsweeper* (Imagic, 1984) and
+verifying it byte-for-byte against moonsweeperOriginal.lst.
+
+### The listing wraps long data 3 bytes per line
+
+.HS/.DA data is printed 3 bytes per physical listing line. The source text
+appears only on the **last** physical line of each group; the earlier lines are
+continuations with an address + bytes but **no line number**:
+
+`
+2EFD- FF C3 99
+2F00- 99 99 99
+2F03- C3 FF     2940            .HS FFC399999999C3FF   AC 0
+`
+
+Macro-expansion lines carry a line number of  000> (digits then >).
+
+### .DA operand forms seen in Moonsweeper
+
+| S-C | 64tass | Meaning |
+| --- | --- | --- |
+| .DA TEMP1 | .word TEMP1 | 16-bit address (2 bytes) |
+| .DA #LT.RED | .byte LT_RED | single byte value |
+
+.DA LABEL with no prefix is a **2-byte** address (do not make it .byte).
+
+### / and # high/low byte in instructions
+
+- LDA /COLD.START → LDA #>COLD_START  (immediate high byte; listing A9 08)
+- LDA #COLD.START  → LDA #<COLD_START  (immediate low byte; 64tass rejects
+  LDA # as "too large for a 8 bit unsigned integer")
+
+64tass applies >/< to the whole following expression, matching S-C:
+LDA #>DO_SHIP_2-1 is >(DO_SHIP_2-1), same as S-C /DO.SHIP.2-1.
+
+### Cheap local labels .1 do NOT work inside macro expansion
+
+In 64tass 1.60.3243, .1/.2 inside a .macro body that gets expanded fails
+with wrong type 'int' (they parse as numbers; ChopperHunt only built because
+its .1 macros were never invoked). Use the documented **anonymous symbols**:
+
+`ssembly
+ADD .macro
+    LDA #\1
+    CLC
+    ADC \2
+    STA \2
+    BCC +
+    INC \2+1
++   .endm
+`
+
+BCC + is a forward reference to the nearest +, so it is safe no matter how
+many times the macro is expanded or what locals the caller has in scope.
+
+### Main-code S-C local labels .N -> _N
+
+S-C .1, .2 local labels in main code become 64tass _1, _2 locals
+(scoped to the surrounding code label). 64tass resolves them to the nearest
+definition in the branch direction, which matches the S-C usage.
+
+### .DUMMY + .OR -> .virtual with the address on the same line
+
+64tass requires the address on the .virtual line:
+
+`
+.DUMMY      ->   .virtual 
+.OR 
+.ED         ->   .endv
+`
+
+### 64tass pads origin-change gaps with zeros
+
+A BASIC stub at $0801 followed by * =  produces 83 filler zero bytes
+($080D-) in the .prg. Harmless for VICE autostart; a verifier that
+compares against the original listing must skip by address, not assume the
+bytes are contiguous after the stub.
+
+### Opcode-embedding via .HS
+
+.1 .HS 9D (emit opcode $9D for self-modifying STA ,X) becomes
+.1 .byte .

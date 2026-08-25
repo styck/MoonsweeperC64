@@ -1,269 +1,268 @@
- 1000 *--------------------------------
- 1010 * FILE>MOON.SHAPES.1
- 1020 *--------------------------------
- 1030 *
- 1040 *--------------------------------
- 1050 * UNIVERSE SHAPES
- 1060 *--------------------------------
- 1070 GAMESET	 .HS 0000000000000000	00 BLANK SPACE
- 1080 *--------------------------------
- 1090 * CONTROL PANEL
- 1100 *--------------------------------
- 1110		 .HS FFFF0000FFFFFFFF	01 PANEL
- 1120		 .HS 00FFFF0000FFFFFF	02
- 1130		 .HS 0000FFFF0000FFFF	03
- 1140		 .HS 000000FFFF0000FF	04
- 1150		 .HS 00000000FFFF0000	05
- 1160		 .HS 00000000001FFFE0	06
- 1170		 .HS 0000000000F8FF07	07
- 1180		 .HS 003C7E7E7E3C0000	08 DESIGN
- 1190		 .HS 0007182020606060	09 GUAGE
- 1200		 .HS 00FF000000000000	0A
- 1210		 .HS 00E0180404060606	0B
- 1220		 .HS 6060602020180700	0C
- 1230		 .HS 000000000000FF00	0D
- 1240		 .HS 060606040418E000	0E
- 1250		 .HS 6060606060606060	0F GUAGE LEFT
- 1260		 .HS 0000666666181800	10 VEL
- 1270		 .HS 00007E607E607E00	11
- 1280		 .HS 0000606060607E00	12
- 1290		 .HS 0606060606060606	13 GUAGE RIGHT
- 1300		 .HS 0000F3C3F3C3C300	14 FUEL
- 1310		 .HS 000067666766E700	15
- 1320		 .HS 0000981898189F00	16
- 1330		 .HS 6F6C6C6C6C6C6C6F	17 BANK INDICATOR
- 1340		 .HS FF0000C0C0F000FF	18
- 1350		 .HS C3000000000000C3	19
- 1360		 .HS FF00000E0E0900FF	1A
- 1370		 .HS F6363636363636F6	1B
- 1380		 .HS E7C3DB99004266FF	1C SHIPS REMAINING
- 1390		 .HS E74281C3C39999FF	1D MEN PICKED UP
- 1400		 .HS 3C6666666666663C	1E 0
- 1410		 .HS 183818181818183C	1F 1
- 1420		 .HS 3C66060C0C06663C	20 3
- 1430		 .HS 3C66607C6666663C	21 6
- 1440		 .HS 3C6666663E06663C	22 9
- 1450 *--------------------------------
- 1460 * SPACE SHAPES
- 1470 *--------------------------------
- 1480		 .HS 0000070F0E090720	23 SMALL.PLANET
- 1490		 .HS 0008C0A060E0C000	24
- 1500		 .HS 000000000000030F	25 MEDIUM.PLANET
- 1510		 .HS 0000000000FFDBF0	26
- 1520		 .HS 00000800007F831C	27
- 1530		 .HS 0F1F1F1F1E20C3FD	28
- 1540		 .HS E1FEF1EE1EFFFFFE	29
- 1550		 .HS F0E0E0E0E0808000	2A
- 1560		 .HS 000000030F3F3F7F	2B LARGE.PLANET
- 1570		 .HS 000F7FFFFFFFFFE7	2C
- 1580		 .HS FFFFE01FFFFFFFCF	2D
- 1590		 .HS 00F03E0701C0C0F0	2E
- 1600		 .HS 000000C0F03C1CFF	2F
- 1610		 .HS 01010707070F0707	30
- 1620		 .HS FFFFFFFFFFFFFFFF	31
- 1630		 .HS 82F097FEFFFFFFFF	32
- 1640		 .HS 0303E3E3079FFFFF	33
- 1650		 .HS C8C0C0F0C80E0FFF	34
- 1660		 .HS 7F3F0F0D000E00C0	35
- 1670		 .HS 0000C0C0C0E02020	36
- 1680		 .HS 0F07070701010000	37 LARGE.PLANET.BOTTOM
- 1690		 .HS F3C000F0B0C37F7F	38
- 1700		 .HS FFFFFFFFFFFFF3C3	39
- 1710		 .HS FFFFFFFFFFFFFCF0	3A
- 1720		 .HS 66868E8CCC70F000	3B
- 1730		 .HS E02020E0C0C08080	3C
- 1740		 .HS 7F3F0F0700000000	3D
- 1750		 .HS FFFFFFFBFF3F0F00	3E
- 1760		 .HS FCF8F9D4FFFFFFFC	3F
- 1770		 .HS 030638F0C0000000	40
- 1780		 .HS 1F70FEF9FFFF7F1F	41 BLUE.MOON
- 1790		 .HS E03800CCCCFCF8E0	42
- 1800		 .HS 000000107C100000	43 BIG.STAR
- 1810		 .HS 3D4F7CCF0339E717	44 NEBULA1
- 1820		 .HS 4000F0C0E0D0D0C8	45
- 1830		 .HS 4F197CF97EBF9F5D	46 NEBULA3
- 1840		 .HS F0FCFFFF71FFF8E2	47
- 1850		 .HS 10001239F33F8049	48 NEBULA4
- 1860		 .HS 004A01FCE6014400	49
- 1870		 .HS 20471E9D1F8F4315	4A NEBULA2
- 1880		 .HS F0FE0088C0C08220	4B
- 1890		 .HS 1010288228101000	4C TINY.PLANET
- 1900 *--------------------------------
- 1910 * RANDOM STARS
- 1920 *--------------------------------
- 1930		 .HS 0041000280030100	4D NEBULA STARS
- 1940		 .HS 4000201000030000	4E
- 1950		 .HS 1061000200200000	4F
- 1960		 .HS 00008040006000C0	50
- 1970		 .HS 0000000008000000	51
- 1980		 .HS 0200000120810882	52
- 1990		 .HS 0801000400029004	53
- 2000		 .HS 0001440088000088	54
- 2010		 .HS A009400840000000	55
- 2020		 .HS 1100029100022000	56
- 2030		 .HS 0002004000000400	57
- 2040		 .HS 0000200410024000	58
- 2050		 .HS 4803240108030000	59
- 2060		 .HS 00C0C0E0EFFEF000	5A BOTTOM.LARGE
- 2070 *--------------------------------
- 2080 * ORBITAL PLANET
- 2090 *--------------------------------
- 2100		 .HS 0000077FFFFFFFFF	5B	 87
- 2110		 .HS 00000000077FFFFF	5C	 86
- 2120		 .HS 000000000000073F	5D	 85
- 2130		 .HS FFFFFFFFFFFFFFFF	5E	 E6
- 2140		 .HS FFF7FDDD7F575777	5F	 EE
- 2150		 .HS 55D5FDFDFFFFFFFF	60	 E5
- 2160		 .HS 010F3FFFFFFFFFFF	61	 84
- 2170		 .HS 00000000030F3FFF	62	 B2
- 2180		 .HS 071F7FFFFFFFFFFF	63	 82
- 2190		 .HS 00000001071F7FFF	64	 83
- 2200		 .HS FFFFFFFF7F5F5755	65	 E2
- 2210		 .HS DF55555555555555	66	 EB
- 2220		 .HS 030F3FFFFFFFFFFF	67	 A6
- 2230		 .HS 0000000001070F3F	68	 A5
- 2240		 .HS 0100000000000000	69	 DE
- 2250		 .HS 000000000080F8FF	6A	 DD
- 2260		 .HS 00000080F8FFFF1F	6B	 DC
- 2270		 .HS 00C0F8FFFF0F01E0	6C	 6D
- 2280		 .HS F0FFFFFF0100F8FF	6D	 A8
- 2290		 .HS FFFFFF00007FFFFF	6E	 6F
- 2300		 .HS FFFFFFF8C000071F	6F	 01
- 2310		 .HS 00030F1F3F7F7FFF	70	 BF
- 2320		 .HS FF7F5F5755555555	71	 E1
- 2330		 .HS 0001070F3F7FFFFF	72	 81
- 2340		 .HS 0000000000C0F0FC	73	 AD
- 2350		 .HS 000080F0FCFF5FEB	74	 0A
- 2360		 .HS E0FCFF7FAFF5FFFF	75	 09
- 2370		 .HS FF3FC7FAFFFFFFFF	76	 6C
- 2380		 .HS E1FEFFEFFEFFFF1F	77	 6E
- 2390		 .HS FF7FFEFFFFFF0300	78	 0E
- 2400		 .HS FFC03FFFF43F70C0	79	 0F
- 2410		 .HS FF1F7FFFFFFEFCF9	7A	 DB
- 2420		 .HS 1F3E3C3C3C3C1E1F	7B	 6B
- 2430		 .HS 7EFEFEFEFEFEFF7F	7C	 A9
- 2440		 .HS 5555555555D5F5FD	7D	 EA
- 2450		 .HS 55D5F5FDFFFFFFFF	7E	 E9
- 2460		 .HS ABAFBFFFFFFFFFFF	7F	 72
- 2470		 .HS AAAAAAAAAB0B0F0F	80	 1A
- 2480		 .HS FFFF7F0700000000	81	 19
- 2490		 .HS 7F03000000000000	82	 1B
- 2500		 .HS 800080C0C0E0F0B8	83	 0B
- 2510		 .HS F9F979FDBEDFFFF7	84	 D8
- 2520		 .HS 1F8F87C7E3E3F1F8	85	 1C
- 2530		 .HS FB7B797D3C3F1F1F	86	 AB
- 2540		 .HS FFD7D7F5F5FDFDFF	87	 ED
- 2550		 .HS 555555D5D5D5FDFF	88	 E8
- 2560		 .HS 1F3F7FFFFFFFFFFF	89	 95
- 2570		 .HS 000000000103070F	8A	 97
- 2580		 .HS 00000080C0E078BC	8B	 18
- 2590		 .HS DCEEF7FBFD7F3F9F	8C	 1E
- 2600		 .HS 0F07070303010000	8D	 07
- 2610		 .HS 1F3F7FFFFFFFFFFF	8E	 9D
- 2620		 .HS 00000000010307CF	8F	 9F
- 2630		 .HS 0080C0E0F8FCFFFF	90	 08
- 2640		 .HS FEFFFFFF3F9FCFE7	91	 DA
- 2650		 .HS 7F3F3F1F0F070303	92	 4D
- 2660		 .HS FFFFFFFFFFBFAFAB	93	 15
- 2670		 .HS BFAFABAAAAAAAAAA	94	 14
- 2680		 .HS FFFFFFBFFFEFF3FD	95	 4B
- 2690		 .HS FBFDFFFFFFFFFFFF	96	 D9
- 2700		 .HS FFFF7F3F1F0F0703	97	 AE
- 2710		 .HS FFFFBFAFAFABAAAA	98	 17
- 2720		 .HS ABAAAAAAAAAAAAAA	99	 16
- 2730		 .HS FBFD7E3F1F0F0703	9A	 4C
- 2740		 .HS 7F5F575555555555	9B	 E3
- 2750		 .HS FFFF7F3F1F0F0713	9C	 1F
- 2760		 .HS AAAAAAEAFAFAFEFF	9D	 3E
- 2770		 .HS 3D7EFFFFFFFFFFFF	9E	 99
- 2780		 .HS 0000000001030307	9F	 98
- 2790		 .HS FFFFFFFFFFBFAFAB	A0	 38
- 2800		 .HS BFAFABAAAAAAAAAA	A1	 14
- 2810		 .HS FFFFFFFFFFBFDFEF	A2	 48
- 2820		 .HS AAEAEAFAFAFEFFFF	A3	 3F
- 2830		 .HS 070F0F1F3F3F7F7F	A4	 9B
- 2840		 .HS FFFFFFFFFFFFBFAF	A5	 39
- 2850		 .HS FFFFBFAFABAAAAAA	A6	 3A
- 2860		 .HS FFFF7FFFFFE7F1FC	A7	 49
- 2870		 .HS FBFDFEFFFFFFFFFF	A8	 4A
- 2880		 .HS AAAAAAAAAAAAAAEA	A9	 11
- 2890		 .HS EAEAFAFAFEFEFFFF	AA	 3B
- 2900		 .HS 0000010103030707	AB	 9C
- 2910 *--------------------------------
- 2920 * NUMBERS
- 2930 *--------------------------------
- 2940		 .HS FFC399999999C3FF	AC 0
- 2950		 .HS FFE7C7E7E7E7C3FF	AD 1
- 2960		 .HS FFC3B9F3E7CF81FF	AE 2
- 2970		 .HS FFC3F9E3F999C3FF	AF 3
- 2980		 .HS FF9F9B9B81F3F3FF	B0 4
- 2990		 .HS FF819F83F999C3FF	B1 5
- 3000		 .HS FFC39F839999C3FF	B2 6
- 3010		 .HS FF81B9F3E7CFCFFF	B3 7
- 3020		 .HS FFC399C39999C3FF	B4 8
- 3030		 .HS FFC39999C1F9C3FF	B5 9
- 3040 *--------------------------------
- 3050 * GAME OVER
- 3060 *--------------------------------
- 3070		 .HS 7FFFE0E3E3E0FF7F	B6
- 3080		 .HS FCFC00F8FC1CFCF8	B7 G
- 3090		 .HS FFFF007FFFE0FF7F	B8
- 3100		 .HS F0F838F8F838F8FC	B9 A
- 3110		 .HS E0F0F8FCEFE7E3E0	BA
- 3120		 .HS 1C3C7CFCDC9C1C1C	BB M
- 3130		 .HS 7FFFE0FFFFE0FF7F	BC
- 3140		 .HS F8F800F8F800F8F8	BD E
- 3150		 .HS 7FFFE0E0E0E0FF7F	BE
- 3160		 .HS F8FC1C1C1C1CFCF8	BF O
- 3170		 .HS E0F0783C1F0F0703	C0
- 3180		 .HS 1C3C78F0E0C08000	C1 V
- 3190		 .HS FFFFE0E0FFFFE0E0	C2
- 3200		 .HS E0F07070F0E0E070	C3 R
- 3210 GAMEND	 .EQ *
- 3220 *--------------------------------
- 3230 * PLANET.SECONDARY COLORS
- 3240 *--------------------------------
- 3250 PLANET.SUB.COLOR	  .HS 0000   FILLER
- 3260			  .DA #LT.RED
- 3270			  .HS 0000
- 3280			  .DA #LT.GREEN
- 3290			  .DA #LT.BLUE
- 3300			  .DA #ORANGE
- 3310 *--------------------------------
- 3320 * SOUND TABLES
- 3330 *--------------------------------
- 3340 WARNING.FRQ	  .HS E835
- 3350			  .HS 201C
- 3360 INTO.PLANET.TBL	  .HS 09584128
- 3370			  .HS 00004001
- 3380			  .HS 09584108
- 3390			  .HS 00004001
- 3400			  .HS 09584108
- 3410			  .HS 00004001
- 3420			  .HS 0E084118
- 3430			  .HS 00000401
- 3440			  .HS FF
- 3450 MAN.SOUND.TBL	  .HS 10DE4102
- 3460			  .HS 11DE4102
- 3470			  .HS 12DE4102
- 3480			  .HS 13DE4102
- 3490			  .HS 14DE4102
- 3500			  .HS 15DE4102
- 3510			  .HS 00000401
- 3520			  .HS FF
- 3530 SAUCER.SOUND.TBL	  .HS 13E84104
- 3540			  .HS 00000401
- 3550			  .HS FF
- 3560 RING.SOUND.TBL	  .HS 00004110
- 3570			  .HS 00000401
- 3580			  .HS FF
- 3590 BLOWUP.SOUND.TBL	  .HS 03EE8140
- 3600			  .HS 03EE8140
- 3610			  .HS 00000401
- 3620 STOP.SOUND	  .HS FF
- 3630 *--------------------------------
- 3640 * SHIP VELOCITY TABLE
- 3650 *--------------------------------
- 3660 VEL.SUB.TABLE	  .HS 0505060607070808
- 3670			  .HS 09090A0A0B0B0C0C
-
+;--------------------------------
+; FILE>MOON.SHAPES.1
+;--------------------------------
+;
+;--------------------------------
+; UNIVERSE SHAPES
+;--------------------------------
+GAMESET .byte $00, $00, $00, $00, $00, $00, $00, $00 ; 00 BLANK SPACE
+;--------------------------------
+; CONTROL PANEL
+;--------------------------------
+.byte $FF, $FF, $00, $00, $FF, $FF, $FF, $FF ; 01 PANEL
+.byte $00, $FF, $FF, $00, $00, $FF, $FF, $FF ; 02
+.byte $00, $00, $FF, $FF, $00, $00, $FF, $FF ; 03
+.byte $00, $00, $00, $FF, $FF, $00, $00, $FF ; 04
+.byte $00, $00, $00, $00, $FF, $FF, $00, $00 ; 05
+.byte $00, $00, $00, $00, $00, $1F, $FF, $E0 ; 06
+.byte $00, $00, $00, $00, $00, $F8, $FF, $07 ; 07
+.byte $00, $3C, $7E, $7E, $7E, $3C, $00, $00 ; 08 DESIGN
+.byte $00, $07, $18, $20, $20, $60, $60, $60 ; 09 GUAGE
+.byte $00, $FF, $00, $00, $00, $00, $00, $00 ; 0A
+.byte $00, $E0, $18, $04, $04, $06, $06, $06 ; 0B
+.byte $60, $60, $60, $20, $20, $18, $07, $00 ; 0C
+.byte $00, $00, $00, $00, $00, $00, $FF, $00 ; 0D
+.byte $06, $06, $06, $04, $04, $18, $E0, $00 ; 0E
+.byte $60, $60, $60, $60, $60, $60, $60, $60 ; 0F GUAGE LEFT
+.byte $00, $00, $66, $66, $66, $18, $18, $00 ; 10 VEL
+.byte $00, $00, $7E, $60, $7E, $60, $7E, $00 ; 11
+.byte $00, $00, $60, $60, $60, $60, $7E, $00 ; 12
+.byte $06, $06, $06, $06, $06, $06, $06, $06 ; 13 GUAGE RIGHT
+.byte $00, $00, $F3, $C3, $F3, $C3, $C3, $00 ; 14 FUEL
+.byte $00, $00, $67, $66, $67, $66, $E7, $00 ; 15
+.byte $00, $00, $98, $18, $98, $18, $9F, $00 ; 16
+.byte $6F, $6C, $6C, $6C, $6C, $6C, $6C, $6F ; 17 BANK INDICATOR
+.byte $FF, $00, $00, $C0, $C0, $F0, $00, $FF ; 18
+.byte $C3, $00, $00, $00, $00, $00, $00, $C3 ; 19
+.byte $FF, $00, $00, $0E, $0E, $09, $00, $FF ; 1A
+.byte $F6, $36, $36, $36, $36, $36, $36, $F6 ; 1B
+.byte $E7, $C3, $DB, $99, $00, $42, $66, $FF ; 1C SHIPS REMAINING
+.byte $E7, $42, $81, $C3, $C3, $99, $99, $FF ; 1D MEN PICKED UP
+.byte $3C, $66, $66, $66, $66, $66, $66, $3C ; 1E 0
+.byte $18, $38, $18, $18, $18, $18, $18, $3C ; 1F 1
+.byte $3C, $66, $06, $0C, $0C, $06, $66, $3C ; 20 3
+.byte $3C, $66, $60, $7C, $66, $66, $66, $3C ; 21 6
+.byte $3C, $66, $66, $66, $3E, $06, $66, $3C ; 22 9
+;--------------------------------
+; SPACE SHAPES
+;--------------------------------
+.byte $00, $00, $07, $0F, $0E, $09, $07, $20 ; 23 SMALL.PLANET
+.byte $00, $08, $C0, $A0, $60, $E0, $C0, $00 ; 24
+.byte $00, $00, $00, $00, $00, $00, $03, $0F ; 25 MEDIUM.PLANET
+.byte $00, $00, $00, $00, $00, $FF, $DB, $F0 ; 26
+.byte $00, $00, $08, $00, $00, $7F, $83, $1C ; 27
+.byte $0F, $1F, $1F, $1F, $1E, $20, $C3, $FD ; 28
+.byte $E1, $FE, $F1, $EE, $1E, $FF, $FF, $FE ; 29
+.byte $F0, $E0, $E0, $E0, $E0, $80, $80, $00 ; 2A
+.byte $00, $00, $00, $03, $0F, $3F, $3F, $7F ; 2B LARGE.PLANET
+.byte $00, $0F, $7F, $FF, $FF, $FF, $FF, $E7 ; 2C
+.byte $FF, $FF, $E0, $1F, $FF, $FF, $FF, $CF ; 2D
+.byte $00, $F0, $3E, $07, $01, $C0, $C0, $F0 ; 2E
+.byte $00, $00, $00, $C0, $F0, $3C, $1C, $FF ; 2F
+.byte $01, $01, $07, $07, $07, $0F, $07, $07 ; 30
+.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; 31
+.byte $82, $F0, $97, $FE, $FF, $FF, $FF, $FF ; 32
+.byte $03, $03, $E3, $E3, $07, $9F, $FF, $FF ; 33
+.byte $C8, $C0, $C0, $F0, $C8, $0E, $0F, $FF ; 34
+.byte $7F, $3F, $0F, $0D, $00, $0E, $00, $C0 ; 35
+.byte $00, $00, $C0, $C0, $C0, $E0, $20, $20 ; 36
+.byte $0F, $07, $07, $07, $01, $01, $00, $00 ; 37 LARGE.PLANET.BOTTOM
+.byte $F3, $C0, $00, $F0, $B0, $C3, $7F, $7F ; 38
+.byte $FF, $FF, $FF, $FF, $FF, $FF, $F3, $C3 ; 39
+.byte $FF, $FF, $FF, $FF, $FF, $FF, $FC, $F0 ; 3A
+.byte $66, $86, $8E, $8C, $CC, $70, $F0, $00 ; 3B
+.byte $E0, $20, $20, $E0, $C0, $C0, $80, $80 ; 3C
+.byte $7F, $3F, $0F, $07, $00, $00, $00, $00 ; 3D
+.byte $FF, $FF, $FF, $FB, $FF, $3F, $0F, $00 ; 3E
+.byte $FC, $F8, $F9, $D4, $FF, $FF, $FF, $FC ; 3F
+.byte $03, $06, $38, $F0, $C0, $00, $00, $00 ; 40
+.byte $1F, $70, $FE, $F9, $FF, $FF, $7F, $1F ; 41 BLUE.MOON
+.byte $E0, $38, $00, $CC, $CC, $FC, $F8, $E0 ; 42
+.byte $00, $00, $00, $10, $7C, $10, $00, $00 ; 43 BIG.STAR
+.byte $3D, $4F, $7C, $CF, $03, $39, $E7, $17 ; 44 NEBULA1
+.byte $40, $00, $F0, $C0, $E0, $D0, $D0, $C8 ; 45
+.byte $4F, $19, $7C, $F9, $7E, $BF, $9F, $5D ; 46 NEBULA3
+.byte $F0, $FC, $FF, $FF, $71, $FF, $F8, $E2 ; 47
+.byte $10, $00, $12, $39, $F3, $3F, $80, $49 ; 48 NEBULA4
+.byte $00, $4A, $01, $FC, $E6, $01, $44, $00 ; 49
+.byte $20, $47, $1E, $9D, $1F, $8F, $43, $15 ; 4A NEBULA2
+.byte $F0, $FE, $00, $88, $C0, $C0, $82, $20 ; 4B
+.byte $10, $10, $28, $82, $28, $10, $10, $00 ; 4C TINY.PLANET
+;--------------------------------
+; RANDOM STARS
+;--------------------------------
+.byte $00, $41, $00, $02, $80, $03, $01, $00 ; 4D NEBULA STARS
+.byte $40, $00, $20, $10, $00, $03, $00, $00 ; 4E
+.byte $10, $61, $00, $02, $00, $20, $00, $00 ; 4F
+.byte $00, $00, $80, $40, $00, $60, $00, $C0 ; 50
+.byte $00, $00, $00, $00, $08, $00, $00, $00 ; 51
+.byte $02, $00, $00, $01, $20, $81, $08, $82 ; 52
+.byte $08, $01, $00, $04, $00, $02, $90, $04 ; 53
+.byte $00, $01, $44, $00, $88, $00, $00, $88 ; 54
+.byte $A0, $09, $40, $08, $40, $00, $00, $00 ; 55
+.byte $11, $00, $02, $91, $00, $02, $20, $00 ; 56
+.byte $00, $02, $00, $40, $00, $00, $04, $00 ; 57
+.byte $00, $00, $20, $04, $10, $02, $40, $00 ; 58
+.byte $48, $03, $24, $01, $08, $03, $00, $00 ; 59
+.byte $00, $C0, $C0, $E0, $EF, $FE, $F0, $00 ; 5A BOTTOM.LARGE
+;--------------------------------
+; ORBITAL PLANET
+;--------------------------------
+.byte $00, $00, $07, $7F, $FF, $FF, $FF, $FF ; 5B 87
+.byte $00, $00, $00, $00, $07, $7F, $FF, $FF ; 5C 86
+.byte $00, $00, $00, $00, $00, $00, $07, $3F ; 5D 85
+.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; 5E E6
+.byte $FF, $F7, $FD, $DD, $7F, $57, $57, $77 ; 5F EE
+.byte $55, $D5, $FD, $FD, $FF, $FF, $FF, $FF ; 60 E5
+.byte $01, $0F, $3F, $FF, $FF, $FF, $FF, $FF ; 61 84
+.byte $00, $00, $00, $00, $03, $0F, $3F, $FF ; 62 B2
+.byte $07, $1F, $7F, $FF, $FF, $FF, $FF, $FF ; 63 82
+.byte $00, $00, $00, $01, $07, $1F, $7F, $FF ; 64 83
+.byte $FF, $FF, $FF, $FF, $7F, $5F, $57, $55 ; 65 E2
+.byte $DF, $55, $55, $55, $55, $55, $55, $55 ; 66 EB
+.byte $03, $0F, $3F, $FF, $FF, $FF, $FF, $FF ; 67 A6
+.byte $00, $00, $00, $00, $01, $07, $0F, $3F ; 68 A5
+.byte $01, $00, $00, $00, $00, $00, $00, $00 ; 69 DE
+.byte $00, $00, $00, $00, $00, $80, $F8, $FF ; 6A DD
+.byte $00, $00, $00, $80, $F8, $FF, $FF, $1F ; 6B DC
+.byte $00, $C0, $F8, $FF, $FF, $0F, $01, $E0 ; 6C 6D
+.byte $F0, $FF, $FF, $FF, $01, $00, $F8, $FF ; 6D A8
+.byte $FF, $FF, $FF, $00, $00, $7F, $FF, $FF ; 6E 6F
+.byte $FF, $FF, $FF, $F8, $C0, $00, $07, $1F ; 6F 01
+.byte $00, $03, $0F, $1F, $3F, $7F, $7F, $FF ; 70 BF
+.byte $FF, $7F, $5F, $57, $55, $55, $55, $55 ; 71 E1
+.byte $00, $01, $07, $0F, $3F, $7F, $FF, $FF ; 72 81
+.byte $00, $00, $00, $00, $00, $C0, $F0, $FC ; 73 AD
+.byte $00, $00, $80, $F0, $FC, $FF, $5F, $EB ; 74 0A
+.byte $E0, $FC, $FF, $7F, $AF, $F5, $FF, $FF ; 75 09
+.byte $FF, $3F, $C7, $FA, $FF, $FF, $FF, $FF ; 76 6C
+.byte $E1, $FE, $FF, $EF, $FE, $FF, $FF, $1F ; 77 6E
+.byte $FF, $7F, $FE, $FF, $FF, $FF, $03, $00 ; 78 0E
+.byte $FF, $C0, $3F, $FF, $F4, $3F, $70, $C0 ; 79 0F
+.byte $FF, $1F, $7F, $FF, $FF, $FE, $FC, $F9 ; 7A DB
+.byte $1F, $3E, $3C, $3C, $3C, $3C, $1E, $1F ; 7B 6B
+.byte $7E, $FE, $FE, $FE, $FE, $FE, $FF, $7F ; 7C A9
+.byte $55, $55, $55, $55, $55, $D5, $F5, $FD ; 7D EA
+.byte $55, $D5, $F5, $FD, $FF, $FF, $FF, $FF ; 7E E9
+.byte $AB, $AF, $BF, $FF, $FF, $FF, $FF, $FF ; 7F 72
+.byte $AA, $AA, $AA, $AA, $AB, $0B, $0F, $0F ; 80 1A
+.byte $FF, $FF, $7F, $07, $00, $00, $00, $00 ; 81 19
+.byte $7F, $03, $00, $00, $00, $00, $00, $00 ; 82 1B
+.byte $80, $00, $80, $C0, $C0, $E0, $F0, $B8 ; 83 0B
+.byte $F9, $F9, $79, $FD, $BE, $DF, $FF, $F7 ; 84 D8
+.byte $1F, $8F, $87, $C7, $E3, $E3, $F1, $F8 ; 85 1C
+.byte $FB, $7B, $79, $7D, $3C, $3F, $1F, $1F ; 86 AB
+.byte $FF, $D7, $D7, $F5, $F5, $FD, $FD, $FF ; 87 ED
+.byte $55, $55, $55, $D5, $D5, $D5, $FD, $FF ; 88 E8
+.byte $1F, $3F, $7F, $FF, $FF, $FF, $FF, $FF ; 89 95
+.byte $00, $00, $00, $00, $01, $03, $07, $0F ; 8A 97
+.byte $00, $00, $00, $80, $C0, $E0, $78, $BC ; 8B 18
+.byte $DC, $EE, $F7, $FB, $FD, $7F, $3F, $9F ; 8C 1E
+.byte $0F, $07, $07, $03, $03, $01, $00, $00 ; 8D 07
+.byte $1F, $3F, $7F, $FF, $FF, $FF, $FF, $FF ; 8E 9D
+.byte $00, $00, $00, $00, $01, $03, $07, $CF ; 8F 9F
+.byte $00, $80, $C0, $E0, $F8, $FC, $FF, $FF ; 90 08
+.byte $FE, $FF, $FF, $FF, $3F, $9F, $CF, $E7 ; 91 DA
+.byte $7F, $3F, $3F, $1F, $0F, $07, $03, $03 ; 92 4D
+.byte $FF, $FF, $FF, $FF, $FF, $BF, $AF, $AB ; 93 15
+.byte $BF, $AF, $AB, $AA, $AA, $AA, $AA, $AA ; 94 14
+.byte $FF, $FF, $FF, $BF, $FF, $EF, $F3, $FD ; 95 4B
+.byte $FB, $FD, $FF, $FF, $FF, $FF, $FF, $FF ; 96 D9
+.byte $FF, $FF, $7F, $3F, $1F, $0F, $07, $03 ; 97 AE
+.byte $FF, $FF, $BF, $AF, $AF, $AB, $AA, $AA ; 98 17
+.byte $AB, $AA, $AA, $AA, $AA, $AA, $AA, $AA ; 99 16
+.byte $FB, $FD, $7E, $3F, $1F, $0F, $07, $03 ; 9A 4C
+.byte $7F, $5F, $57, $55, $55, $55, $55, $55 ; 9B E3
+.byte $FF, $FF, $7F, $3F, $1F, $0F, $07, $13 ; 9C 1F
+.byte $AA, $AA, $AA, $EA, $FA, $FA, $FE, $FF ; 9D 3E
+.byte $3D, $7E, $FF, $FF, $FF, $FF, $FF, $FF ; 9E 99
+.byte $00, $00, $00, $00, $01, $03, $03, $07 ; 9F 98
+.byte $FF, $FF, $FF, $FF, $FF, $BF, $AF, $AB ; A0 38
+.byte $BF, $AF, $AB, $AA, $AA, $AA, $AA, $AA ; A1 14
+.byte $FF, $FF, $FF, $FF, $FF, $BF, $DF, $EF ; A2 48
+.byte $AA, $EA, $EA, $FA, $FA, $FE, $FF, $FF ; A3 3F
+.byte $07, $0F, $0F, $1F, $3F, $3F, $7F, $7F ; A4 9B
+.byte $FF, $FF, $FF, $FF, $FF, $FF, $BF, $AF ; A5 39
+.byte $FF, $FF, $BF, $AF, $AB, $AA, $AA, $AA ; A6 3A
+.byte $FF, $FF, $7F, $FF, $FF, $E7, $F1, $FC ; A7 49
+.byte $FB, $FD, $FE, $FF, $FF, $FF, $FF, $FF ; A8 4A
+.byte $AA, $AA, $AA, $AA, $AA, $AA, $AA, $EA ; A9 11
+.byte $EA, $EA, $FA, $FA, $FE, $FE, $FF, $FF ; AA 3B
+.byte $00, $00, $01, $01, $03, $03, $07, $07 ; AB 9C
+;--------------------------------
+; NUMBERS
+;--------------------------------
+.byte $FF, $C3, $99, $99, $99, $99, $C3, $FF ; AC 0
+.byte $FF, $E7, $C7, $E7, $E7, $E7, $C3, $FF ; AD 1
+.byte $FF, $C3, $B9, $F3, $E7, $CF, $81, $FF ; AE 2
+.byte $FF, $C3, $F9, $E3, $F9, $99, $C3, $FF ; AF 3
+.byte $FF, $9F, $9B, $9B, $81, $F3, $F3, $FF ; B0 4
+.byte $FF, $81, $9F, $83, $F9, $99, $C3, $FF ; B1 5
+.byte $FF, $C3, $9F, $83, $99, $99, $C3, $FF ; B2 6
+.byte $FF, $81, $B9, $F3, $E7, $CF, $CF, $FF ; B3 7
+.byte $FF, $C3, $99, $C3, $99, $99, $C3, $FF ; B4 8
+.byte $FF, $C3, $99, $99, $C1, $F9, $C3, $FF ; B5 9
+;--------------------------------
+; GAME OVER
+;--------------------------------
+.byte $7F, $FF, $E0, $E3, $E3, $E0, $FF, $7F ; B6
+.byte $FC, $FC, $00, $F8, $FC, $1C, $FC, $F8 ; B7 G
+.byte $FF, $FF, $00, $7F, $FF, $E0, $FF, $7F ; B8
+.byte $F0, $F8, $38, $F8, $F8, $38, $F8, $FC ; B9 A
+.byte $E0, $F0, $F8, $FC, $EF, $E7, $E3, $E0 ; BA
+.byte $1C, $3C, $7C, $FC, $DC, $9C, $1C, $1C ; BB M
+.byte $7F, $FF, $E0, $FF, $FF, $E0, $FF, $7F ; BC
+.byte $F8, $F8, $00, $F8, $F8, $00, $F8, $F8 ; BD E
+.byte $7F, $FF, $E0, $E0, $E0, $E0, $FF, $7F ; BE
+.byte $F8, $FC, $1C, $1C, $1C, $1C, $FC, $F8 ; BF O
+.byte $E0, $F0, $78, $3C, $1F, $0F, $07, $03 ; C0
+.byte $1C, $3C, $78, $F0, $E0, $C0, $80, $00 ; C1 V
+.byte $FF, $FF, $E0, $E0, $FF, $FF, $E0, $E0 ; C2
+.byte $E0, $F0, $70, $70, $F0, $E0, $E0, $70 ; C3 R
+GAMEND = *
+;--------------------------------
+; PLANET.SECONDARY COLORS
+;--------------------------------
+PLANET_SUB_COLOR .byte $00, $00 ; FILLER
+.byte LT_RED
+.byte $00, $00
+.byte LT_GREEN
+.byte LT_BLUE
+.byte ORANGE
+;--------------------------------
+; SOUND TABLES
+;--------------------------------
+WARNING_FRQ .byte $E8, $35
+.byte $20, $1C
+INTO_PLANET_TBL .byte $09, $58, $41, $28
+.byte $00, $00, $40, $01
+.byte $09, $58, $41, $08
+.byte $00, $00, $40, $01
+.byte $09, $58, $41, $08
+.byte $00, $00, $40, $01
+.byte $0E, $08, $41, $18
+.byte $00, $00, $04, $01
+.byte $FF
+MAN_SOUND_TBL .byte $10, $DE, $41, $02
+.byte $11, $DE, $41, $02
+.byte $12, $DE, $41, $02
+.byte $13, $DE, $41, $02
+.byte $14, $DE, $41, $02
+.byte $15, $DE, $41, $02
+.byte $00, $00, $04, $01
+.byte $FF
+SAUCER_SOUND_TBL .byte $13, $E8, $41, $04
+.byte $00, $00, $04, $01
+.byte $FF
+RING_SOUND_TBL .byte $00, $00, $41, $10
+.byte $00, $00, $04, $01
+.byte $FF
+BLOWUP_SOUND_TBL .byte $03, $EE, $81, $40
+.byte $03, $EE, $81, $40
+.byte $00, $00, $04, $01
+STOP_SOUND .byte $FF
+;--------------------------------
+; SHIP VELOCITY TABLE
+;--------------------------------
+VEL_SUB_TABLE .byte $05, $05, $06, $06, $07, $07, $08, $08
+.byte $09, $09, $0A, $0A, $0B, $0B, $0C, $0C
