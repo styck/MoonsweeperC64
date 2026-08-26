@@ -9,6 +9,11 @@ The source in this repo is converted to 64tass syntax and verified
 **byte-for-byte** against the original S-C Macro Assembler listing
 (`moonsweeperOriginal.lst`) — all 14,262 bytes from `$0860` match.
 
+> **New to 6502 assembly?** Start with
+> **[`HOW_IT_WORKS.md`](HOW_IT_WORKS.md)** — a guided tour of how the game
+> actually works on the C64 (memory map, game flow, every subsystem), with
+> hands-on experiments to try.
+
 - `MOONSWPR.ASM` — entry point (BASIC stub `10 SYS <COLD_START>` + includes)
 - `MOONMACR.ASM` — macros (ADD, SUB, BUILD, INC16, PRINT_MACRO)
 - `MOONEQU.ASM` — equates + zero-page variable layout (`* = $0860`)
@@ -19,6 +24,10 @@ The source in this repo is converted to 64tass syntax and verified
 - `tools/convert_sc.py` — the S-C → 64tass converter used for the port
 - `tools/verify.py` — byte-for-byte checker against `moonsweeperOriginal.lst`
 - `SC_TO_64TASS.md` — the conversion playbook (incl. Moonsweeper-specific notes)
+- `HOW_IT_WORKS.md` — **a guided tour of the game for people learning 6502
+  assembly**: the C64 memory map, the game flow, every subsystem (ship,
+  gauges, galaxy screen, collisions, sound, the raster IRQ), and hands-on
+  experiments to try
 
 ## Build
 
