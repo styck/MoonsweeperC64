@@ -1,0 +1,12 @@
+# ===== tools/ =====
+# One-off analysis scripts, renders, and dumps from development exploration.
+# Keep only the core pipeline: S-C conversion, build verification, sprite recovery.
+tools/*
+!tools/convert_sc.py
+!tools/verify.py
+!tools/gen_sprites.py
+!tools/extract_sprites.py
+
+# Python cache
+__pycache__/
+*.pyc
