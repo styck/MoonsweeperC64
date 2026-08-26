@@ -488,6 +488,18 @@ SPR_RADAR_SHIP_D4  ; ptr $D4 -> $7500  [reconstructed blip]
     .byte $00, $00, $00, $00, $00, $00, $00, $00
     .byte $00, $00, $00, $00, $00, $00, $00, $00
 
+; Galaxy selection cursor, verified from running tape at PICK_GALAXY:
+; runtime $5480 = vertical bar cursor (sprite 0, ptr $52).
+SPR_GALAXY_CROSS_52  ; ptr $52 -> $5480  [galaxy selection cursor]
+    .byte $00, $80, $00, $00, $80, $00, $00, $80
+    .byte $00, $00, $80, $00, $00, $80, $00, $00
+    .byte $00, $00, $00, $00, $00, $7C, $1F, $00
+    .byte $00, $00, $00, $00, $00, $00, $00, $80
+    .byte $00, $00, $80, $00, $00, $80, $00, $00
+    .byte $80, $00, $00, $80, $00, $00, $00, $00
+    .byte $00, $00, $00, $00, $00, $00, $00, $00
+    .byte $00, $00, $00, $00, $00, $00, $00, $00
+
 ;--------------------------------
 ; DESTINATION TABLE (one word per block, same order)
 ;--------------------------------
@@ -538,7 +550,8 @@ SPRITE_DEST_TABLE
     .word $7100  ; DIAL ptr $C4
     .word $74C0  ; RADAR_MAN ptr $D3
     .word $7500  ; RADAR_SHIP ptr $D4
-SPRITE_BLOCK_COUNT = 46
+    .word $5480  ; GALAXY_CROSS ptr $52
+SPRITE_BLOCK_COUNT = 47
 
 ;--------------------------------
 ; COPY SPRITES FROM TABLE TO VIC BANK
