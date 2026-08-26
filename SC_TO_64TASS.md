@@ -381,13 +381,13 @@ verifying it byte-for-byte against moonsweeperOriginal.lst.
 appears only on the **last** physical line of each group; the earlier lines are
 continuations with an address + bytes but **no line number**:
 
-`
+```
 2EFD- FF C3 99
 2F00- 99 99 99
 2F03- C3 FF     2940            .HS FFC399999999C3FF   AC 0
-`
+```
 
-Macro-expansion lines carry a line number of  000> (digits then >).
+Macro-expansion lines carry a line number of 0000> (digits then >).
 
 ### .DA operand forms seen in Moonsweeper
 
@@ -413,7 +413,7 @@ In 64tass 1.60.3243, .1/.2 inside a .macro body that gets expanded fails
 with wrong type 'int' (they parse as numbers; ChopperHunt only built because
 its .1 macros were never invoked). Use the documented **anonymous symbols**:
 
-`ssembly
+```assembly
 ADD .macro
     LDA #\1
     CLC
@@ -422,7 +422,7 @@ ADD .macro
     BCC +
     INC \2+1
 +   .endm
-`
+```
 
 BCC + is a forward reference to the nearest +, so it is safe no matter how
 many times the macro is expanded or what locals the caller has in scope.
@@ -437,20 +437,21 @@ definition in the branch direction, which matches the S-C usage.
 
 64tass requires the address on the .virtual line:
 
-`
-.DUMMY      ->   .virtual 
-.OR 
+```
+.DUMMY      ->   .virtual $05
+.OR $05
 .ED         ->   .endv
-`
+```
 
 ### 64tass pads origin-change gaps with zeros
 
-A BASIC stub at $0801 followed by * =  produces 83 filler zero bytes
+A BASIC stub at $0801 followed by `* = $0860` produces 83 filler zero bytes
 ($080D-) in the .prg. Harmless for VICE autostart; a verifier that
 compares against the original listing must skip by address, not assume the
 bytes are contiguous after the stub.
 
 ### Opcode-embedding via .HS
 
-.1 .HS 9D (emit opcode $9D for self-modifying STA ,X) becomes
-.1 .byte .
+`.1 .HS 9D` (emit opcode `$9D` for self-modifying `STA ,X`) becomes
+`.1 .byte $9D`
+
