@@ -26,3 +26,4 @@
     .include "MOONIRQ.ASM"
     .include "MOON.SHAPES.1"
     .include "MOON.SHAPES.2"
+    .include "MOONSPRT.ASM"

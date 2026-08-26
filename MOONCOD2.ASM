@@ -89,6 +89,22 @@ STA IRQLO ; TO POINT TO FIRST CHARACTER
 LDA #>IRQ1
 STA IRQHI
 ;--------------------------------
+; COPY RECOVERED SPRITE SHAPES INTO THE VIC BANK
+; (shapes come from MOONSPRT.ASM - recovered from the tape release)
+;--------------------------------
+JSR INIT_SPRITES
+;--------------------------------
+; RESTORE HUD CHARSET (chars 0-23) THAT INIT_SPRITES' MOTHER BLOCKS CLOBBERED.
+; The mother uses pointers $B2/$B3/$CA at runtime, so it does NOT read $4000-$40BF;
+; those bytes are the HUD glyphs (VEL/FUEL letters, bar, gauges) - put them back.
+;--------------------------------
+LDX #$00
+_rcs LDA GAMESET,X
+STA CHARACTER_MEMORY,X
+INX
+CPX #$C0 ; 192 bytes = 24 chars (0-23)
+BNE _rcs
+;--------------------------------
 RTS
 ;--------------------------------
 ;  INIT I.O SYSTEM
