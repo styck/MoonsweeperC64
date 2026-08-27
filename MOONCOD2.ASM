@@ -93,6 +93,8 @@ STA IRQHI
 ; (shapes come from MOONSPRT.ASM - recovered from the tape release)
 ;--------------------------------
 JSR INIT_SPRITES
+JSR INIT_SPRITES2 ; copy the extra sprites: ship bank $30-$32, saucer shot
+; $4A, satellite $92, mother ship $B2/$B3/$CA (none touch the HUD charset)
 ;--------------------------------
 ; RESTORE HUD CHARSET (chars 0-23) THAT INIT_SPRITES' MOTHER BLOCKS CLOBBERED.
 ; The mother uses pointers $B2/$B3/$CA at runtime, so it does NOT read $4000-$40BF;
