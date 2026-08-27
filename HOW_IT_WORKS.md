@@ -400,6 +400,21 @@ So "ptr $52" is only meaningful because `INIT_SPRITES` copied a shape to
 `MOONSPRT.ASM` and the picture changes; change the dest table and the
 pointer means something different.
 
+Not every sprite comes from the 47-block table, though:
+
+- **`INIT_SPRITES2`** (also called from `INIT_HARDWARE`) loads a few extra
+  shapes — the ship's bank frames `$30`–`$32`, the saucer's shot `$4A`, the
+  satellite `$92`, and the mother ship `$B2`/`$B3`/`$CA`. None of these touch
+  the HUD charset.
+- **Direct-address blocks** — the shot-animation frames and the orbit-object
+  animation chains in `$6080`–`$6840` are placed straight into the VIC bank by
+  the PRG itself, rather than copied by `INIT_SPRITES`.
+
+That last region matters for the orbit objects: they animate by **decrementing
+their sprite pointer** at each `$00` entry in `PARABOLA_YTBL` (in `DO_ORBIT`).
+All those chain blocks must be present, or an object would decrement into an
+empty block and vanish part-way through its arc while still moving.
+
 ---
 
 ## 6. Hands-on experiments

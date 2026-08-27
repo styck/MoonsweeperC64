@@ -5,9 +5,12 @@ rebuilt from the original S-C Macro Assembler source into **64tass** format.
 
 ## Overview
 
-The source in this repo is converted to 64tass syntax and verified
-**byte-for-byte** against the original S-C Macro Assembler listing
-(`moonsweeperOriginal.lst`) — all 14,262 bytes from `$0860` match.
+The source in this repo is converted to 64tass syntax and checked against the
+original S-C Macro Assembler listing (`moonsweeperOriginal.lst`). All 14,262
+bytes of the original game code are preserved in full — the port only **adds**
+recovered sprite data (the S-C source had none) and a small block of code that
+loads those extra sprites into the VIC bank. `tools/verify.py` confirms every
+original byte is intact (no deletions).
 
 > **New to 6502 assembly?** Start with
 > **[`HOW_IT_WORKS.md`](HOW_IT_WORKS.md)** — a guided tour of how the game
@@ -50,5 +53,10 @@ or run VICE with `-autostart MOONSWPR.prg`.
 python tools\verify.py
 ```
 
-Builds `MOONSWPR.prg` and reports whether every byte from `$0860` matches the
-original S-C listing.
+Builds `MOONSWPR.prg` and checks it against the original S-C listing. Because
+the port adds recovered sprite data and a small amount of extra sprite-loading
+code, `verify.py` reports how many original bytes match exactly and the bytes
+the port inserts. It confirms the original game code is fully preserved —
+**nothing from the original is deleted**; all differences are insertions (the
+recovered-sprite loading code) and the downstream address-operand adjustments
+they cause.
