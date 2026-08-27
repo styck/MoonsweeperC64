@@ -3,6 +3,11 @@
 Moonsweeper for the Commodore 64 (Imagic, 1984, by Daniel Filiberti / A.C.T),
 rebuilt from the original S-C Macro Assembler source into **64tass** format.
 
+> **Disclaimer:** This source code is published strictly for historical
+> preservation, education, and research purposes. If you are the rightful
+> copyright holder of this code and object to its archival, please contact me
+> and it will be removed immediately.
+
 ## Overview
 
 The source in this repo is converted to 64tass syntax and checked against the
