@@ -95,6 +95,8 @@ STA IRQHI
 JSR INIT_SPRITES
 JSR INIT_SPRITES2 ; copy the extra sprites: ship bank $30-$32, saucer shot
 ; $4A, satellite $92, mother ship $B2/$B3/$CA (none touch the HUD charset)
+JSR INIT_SPRITES3 ; copy the RING sprites $CB-$D2 (their dests $72C0-$7480
+; overlap the 47-block source table, so they must load after INIT_SPRITES)
 ;--------------------------------
 ; RESTORE HUD CHARSET (chars 0-23) THAT INIT_SPRITES' MOTHER BLOCKS CLOBBERED.
 ; The mother uses pointers $B2/$B3/$CA at runtime, so it does NOT read $4000-$40BF;
