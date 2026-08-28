@@ -140,7 +140,11 @@ RTS
 ;--------------------------------
 ; INITIALIZE.GAME
 ;--------------------------------
-INIT_GAME LDA #$05
+;--------------------------------
+; CLEAR SPRITE SHADOW STATE SO A NEW GAME STARTS CLEAN (see INIT_RESET_SPRITES).
+;--------------------------------
+INIT_GAME JSR INIT_RESET_SPRITES
+LDA #$05
 STA LIVES
 LDA #$00
 STA MOON_INDICATOR

@@ -1736,3 +1736,36 @@ _r3 INX
     CPX #<SPR_RING_COUNT*2
     BNE _r1
     RTS
+
+;------------------------------------------------------------------
+; RESET SPRITE SHADOW STATE FOR A FRESH GAME.
+; COLD_START only clears the $D000/$D400 hardware registers; the zero-page
+; sprite shadows (shot, ship phase, orbit-object arrays) otherwise survive a
+; GAME OVER -> play-again restart, so the IRQ would write stale pointers into
+; the hardware sprite table (corrupted ship / missile showing a "gate" sprite).
+; Called from INIT_GAME. Lives in free RAM (not the $0860 code region).
+;------------------------------------------------------------------
+INIT_RESET_SPRITES LDA #$00
+    STA SHOT_STATUS
+    STA SHOT_COUNT
+    STA SHOT_POINTER
+    STA SHOTX
+    STA SHOTX+1
+    STA SHOTY
+    STA SHOT_XFLAG
+    STA SHOT_XMOVER
+    LDX #$04
+_rs1 LDA #$00
+    STA SPRITE_STATUS,X
+    STA ORBIT_SPRITE,X
+    STA XSPRITE,X
+    STA YSPRITE,X
+    STA XMSB_SPRITE,X
+    STA OBJECT_TYPE,X
+    STA EXPLODE_FLAG,X
+    STA YTBL_POINTER,X
+    DEX
+    BPL _rs1
+    LDA #$33
+    STA SHIP_PHASE
+    RTS
