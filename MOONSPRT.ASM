@@ -18,12 +18,16 @@
 ; destinations by INIT_SPRITES (called from INIT_HARDWARE).
 ;------------------------------------------------------------------
 
-; The table sits at $7240 (just above the orbit-explosion sprites);
-; it must stay below $8000 where INIT_HARDWARE stores the restart
-; vector.  The radar blocks at the end of the table overlap the
-; table region, but they are the LAST blocks copied, so the overlap
-; only clobbers already-consumed source bytes.
-* = $7240
+; The table sits at $9000 in bank-1 free RAM. It must NOT live in the VIC
+; bank ($4000-$7FFF): several sprite DESTINATIONS (orbit explode $C9->$7240,
+; mother $CA->$7280, RING $CB-$D2->$72C0-$7480, radar $74C0/$7500) overlap
+; this source area, so placing it there would let the copy routines clobber
+; their own source. A fresh boot's first INIT_SPRITES would still work (each
+; block is consumed before it's overwritten), but a GAME OVER -> play-again
+; restart would reload sprites (e.g. the ship bank frames $33-$37) from the
+; corrupted source. $9000+ is free RAM never touched at runtime, so the source
+; stays intact across restarts.
+* = $9000
 
 ;--------------------------------
 ; COMPACT SPRITE SHAPE DATA (64 bytes per block)
@@ -592,12 +596,14 @@ _3 INX
 ;   saucer shot $4A  (its 'over the tower' shot shape)
 ;   satellite $92
 ;   mother ship $B2/$B3/$CA  (enemies were invisible without these)
-; Packed at $5800 (free sprite RAM; relocated from $54C0 so the TOWER_TOP
+; Packed at $8400 (bank-1 free RAM; relocated from $54C0 so the TOWER_TOP
 ; $53-$57 / TOWER_BOT $58-$5F sprites can occupy $54C0-$57C0); copied by
-; INIT_SPRITES2 (called right after INIT_SPRITES). None of these dests touch
-; the HUD charset $4000-$40BF, so the HUD charset-restore loop is unaffected.
+; INIT_SPRITES2 (called right after INIT_SPRITES). Bank-1 free RAM keeps this
+; source intact across GAME OVER -> play-again restarts (a VIC-bank location
+; would be overwritten at runtime, corrupting the ship bank frames $30-$32).
+; None of these dests touch the HUD charset $4000-$40BF.
 ;------------------------------------------------------------------
-* = $5800
+* = $8400
 SPR_EXTRA_30  ; ptr $30 -> $4C00  [tape]
     .byte $00, $00, $00, $00, $00, $00, $00, $00
     .byte $00, $00, $00, $00, $00, $00, $00, $70
