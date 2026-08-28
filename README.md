@@ -17,6 +17,11 @@ recovered sprite data (the S-C source had none) and a small block of code that
 loads those extra sprites into the VIC bank. `tools/verify.py` confirms every
 original byte is intact (no deletions).
 
+> **About the sprite data:** The original sprite data was on a Commodore disk
+> that was lost. We were able to fully recover it from the published tape
+> binary — and once we recovered that data, the whole thing went back together
+> just like it was in the 80's!!
+
 > **New to 6502 assembly?** Start with
 > **[`HOW_IT_WORKS.md`](HOW_IT_WORKS.md)** — a guided tour of how the game
 > actually works on the C64 (memory map, game flow, every subsystem), with
