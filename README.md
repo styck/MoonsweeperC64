@@ -22,6 +22,32 @@ original byte is intact (no deletions).
 > binary — and once we recovered that data, the whole thing went back together
 > just like it was in the 80's!!
 
+## How to play
+
+Pilot the U.S.S. Moonsweeper around the sun of Star Quadrant Jupiter. Avoid or
+destroy aurora flares, photon torches and space bullets. Land on one of the
+moons as it passes.
+
+**When on the moon:** rescue 5 miners from the moon. Avoid towers and shots
+fired from alien surface destroyers.
+
+While skimming the moon's surface, shoot towers, surface destroyers, Launcher
+Ships and Lunar Satellites.
+
+When you have picked up 6 miners, fly through the accelerator rings to blast
+off into orbit, then begin another rescue mission.
+
+In each phase the fuel is full again.
+
+**Points**
+- Each destroyed alien: 50
+- Each collected miner: 100
+- Level 1000: you must go to the surface once to finish this level — 1000 points
+- Level 3000: you must go to the surface three times to finish this level — 3000 points
+- Level 6000: you must go to the surface six times to finish this level — 6000 points
+- Level 9000: you must go to the surface nine times to finish this level — 9000 points
+- Each 10,000 points: one extra life
+
 > **New to 6502 assembly?** Start with
 > **[`HOW_IT_WORKS.md`](HOW_IT_WORKS.md)** — a guided tour of how the game
 > actually works on the C64 (memory map, game flow, every subsystem), with
