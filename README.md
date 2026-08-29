@@ -39,6 +39,10 @@ off into orbit, then begin another rescue mission.
 
 In each phase the fuel is full again.
 
+> **Tip:** You can shoot the space stations and ships that are in the sky by
+> pulling back on the joystick while firing. Try it! Under VICE joystick
+> emulation you can hold the mapped "down" key and press the mapped fire button.
+
 **Points**
 - Each destroyed alien: 50
 - Each collected miner: 100
