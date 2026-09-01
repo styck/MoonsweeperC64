@@ -97,6 +97,11 @@ or run VICE with `-autostart MOONSWPR.prg`.
 | --- | --- | --- |
 | ![Skimming the moon's surface](screenshots/Screen3.png) | ![Rescuing miners on the moon](screenshots/Screen4.png) | ![Game over screen](screenshots/Screen5.png) |
 
+> **Disclaimer:** This source code is published strictly for historical
+> preservation, education, and research purposes. If you are the rightful
+> copyright holder of this code and object to its archival, please contact me
+> and it will be removed immediately.
+
 ## Verify the port
 
 ```
