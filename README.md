@@ -87,6 +87,16 @@ Use the VS Code task **Build with 64tass** (`Ctrl+Shift+B`) or run:
 Use the VS Code task **Run in VICE** (builds then autostarts `MOONSWPR.prg`),
 or run VICE with `-autostart MOONSWPR.prg`.
 
+## Screenshots
+
+| Orbit screen | Approaching a ringed planet |
+| --- | --- |
+| ![Orbit screen with the four galaxies](screenshots/Screen1.png) | ![Ship flying toward a ringed planet](screenshots/Screen2.png) |
+
+| Skimming the moon's surface | Moon surface rescue | Game over |
+| --- | --- | --- |
+| ![Skimming the moon's surface](screenshots/Screen3.png) | ![Rescuing miners on the moon](screenshots/Screen4.png) | ![Game over screen](screenshots/Screen5.png) |
+
 ## Verify the port
 
 ```
